@@ -13,11 +13,12 @@ In this repo, we provide a MATLAB implementation of Tiny face detector, includin
 ### Citing us
 If you find our work useful in your research, please consider citing: 
 ```latex
-@article{hu2016finding,
-  title={Finding Tiny Faces},
-  author={Hu, Peiyun and Ramanan, Deva},
-  journal={arXiv preprint arXiv:1612.04402},
-  year={2016}
+@InProceedings{Hu_2017_CVPR,
+  author = {Hu, Peiyun and Ramanan, Deva},
+  title = {Finding Tiny Faces},
+  booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  month = {July},
+  year = {2017}
 }
 ```
 
@@ -36,10 +37,11 @@ Compile MatConvNet by running following commands in MATLAB (see [Installing - M
 >> vl_testnn('gpu', true);  % vl_testnn('gpu', false) for cpu-only 
 ```
 
-Compile our MEX function in MATLAB: 
+Compile our MEX function in MATLAB and test if it works as expected: 
 ```Matlab
 >> cd utils/;
->> compile_mex; 
+>> compile_mex;
+>> test_compute_dense_overlap;
 ```
 
 Download [WIDER FACE](http://mmlab.ie.cuhk.edu.hk/projects/WIDERFace/) and unzip data and annotation files to `data/widerface` such that: 
@@ -59,6 +61,11 @@ Here is a command you can run to reproduce our detection results on the world's 
 ```Matlab 
 >> bboxes = tiny_face_detector('data/demo/selfie.jpg', './selfie.png', 0.5, 0.1, 1)
 ```
+
+The demo script will start by downloading an off-the-shelf ResNet101-based model, if it does not find one. Models based on other architecture are also available below:
+- [ResNet101](https://www.cs.cmu.edu/~peiyunh/tiny/hr_res101.mat)
+- [ResNet50](https://www.cs.cmu.edu/~peiyunh/tiny/hr_res50.mat)
+- [VGG16](https://www.cs.cmu.edu/~peiyunh/tiny/hr_vgg16.mat)
 
 ## Training 
 To train a ResNet101-based Tiny Face Detector, run following command in MATLAB: 
